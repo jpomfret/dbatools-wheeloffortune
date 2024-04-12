@@ -25,7 +25,8 @@
         "2gua.rainbow-brackets",
         "oderwat.indent-rainbow",
         "mhutchie.git-graph",
-        "usernamehw.errorlens"
+        "usernamehw.errorlens",
+        "streetsidesoftware.code-spell-checker"
     ],
     "shutdownAction": "stopCompose",
     "remoteUser": "root"  // not ideal - prob need to setup a non-root user and use that instead. permissions issue without this!
