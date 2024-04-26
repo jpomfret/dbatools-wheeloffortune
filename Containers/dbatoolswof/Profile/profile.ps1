@@ -233,6 +233,10 @@ Set-Content Function:prompt {
 }
 
 ######## wof setup
+# change the servernames to be dbatoosl - doesn't seem to work in the container build process right now
+Invoke-DbaQuery -SqlInstance $dbatools1 -Query "declare @oldSrv sysname; select @oldSrv = srvname from master.dbo.sysservers; EXEC sp_dropserver @oldSrv; EXEC sp_addserver 'dbatools1', local"
+Invoke-DbaQuery -SqlInstance $dbatools2 -Query "declare @oldSrv sysname; select @oldSrv = srvname from master.dbo.sysservers; EXEC sp_dropserver @oldSrv; EXEC sp_addserver 'dbatools2', local"
+
 # clear out the export folder
 Get-ChildItem ./Export/ | Remove-item -Recurse
 
