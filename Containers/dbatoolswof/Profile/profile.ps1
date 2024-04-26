@@ -259,5 +259,17 @@ $null = Backup-DbaDatabase @northwind -Type Log
 # make sure there are no databases on dbatools2
 $null = Get-DbaDatabase -SQlInstance $dbatools2 -ExcludeSystem | Remove-DbaDatabase -Confirm:$false
 
+# function to open the game file
+function Get-DemoFile {
+    param (
+        $number
+    )
+    try {
+        code "demos/$number/$number.ps1"
+    } catch {
+        code-insiders "demos/$number/$number.ps1"
+    }
+}
+
 ## run tests
 Invoke-Pester .\Tests\demo.tests.ps1
