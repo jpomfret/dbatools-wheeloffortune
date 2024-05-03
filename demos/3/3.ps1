@@ -32,3 +32,6 @@ Install-DbaWhoIsActive @deploySplat
 
 # You can use the dbatools Invoke-DbaWhoIsActive command to run the stored procedure
 Invoke-DbaWhoIsActive -SqlInstance dbatools1 -ShowOwnSpid
+
+# reset and get ready to spin!
+Invoke-DemoReset

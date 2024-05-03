@@ -66,3 +66,6 @@ Copy-DbaDbTableData @copySplat
 
 #Confirm that data is there
 Invoke-DbaQuery -SqlInstance dbatools2 -Database $destinationDB -Query "SELECT * FROM [dbo].[CopyOf_Order Details]" | Format-Table
+
+# reset and get ready to spin!
+Invoke-DemoReset

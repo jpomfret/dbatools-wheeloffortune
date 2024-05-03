@@ -44,3 +44,6 @@ Copy-Item -Path "$path\*" -Destination $(Split-Path -Path $path -Parent) -Recurs
     git commit -m "Export-DbaInstance @ $((Get-Date).ToString("yyyyMMdd-HHmmss"))"
     git push
 #>
+
+# reset and get ready to spin!
+Invoke-DemoReset

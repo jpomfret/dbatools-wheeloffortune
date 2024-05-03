@@ -24,3 +24,6 @@ Get-DbaDatabase -SqlInstance dbatools1 -Database DatabaseAdmin | Get-Member
 
 # and if we view all the properties
 Get-DbaDatabase -SqlInstance dbatools1 -Database DatabaseAdmin | Format-List *
+
+# reset and get ready to spin!
+Invoke-DemoReset

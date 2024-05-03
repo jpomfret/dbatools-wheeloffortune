@@ -19,3 +19,6 @@ $compatSplat = @{
     Database    = 'Northwind', 'Pubs'
 }
 Set-DbaDbCompatibility @compatSplat
+
+# reset and get ready to spin!
+Invoke-DemoReset

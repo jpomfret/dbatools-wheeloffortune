@@ -36,3 +36,6 @@ $writeParams = @{
     AutoCreateTable = $true
 }
 $results | Write-DbaDataTable @writeParams
+
+# reset and get ready to spin!
+Invoke-DemoReset

@@ -28,3 +28,6 @@ Restore-DbaDbSnapshot @snapshotSplat
 
 # clean up snapshot
 Get-DbaDbSnapshot @snapshotSplat | Remove-DbaDbSnapshot -Confirm:$false
+
+# reset and get ready to spin!
+Invoke-DemoReset

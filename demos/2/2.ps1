@@ -38,3 +38,6 @@ foreach($inst in @('dbatools1', 'dbatools2')) {
 $excelFilePath = "D:\temp\Compliance_$((Get-Date).ToFileTime()).xlsx"
 $results = Test-DbaBuild -SqlInstance dbatools1, dbatools2 -Latest
 $results | Export-Excel -Path $excelFilePath -TableName "data" -TableStyle Medium10 -AutoSize -Show
+
+# reset and get ready to spin!
+Invoke-DemoReset

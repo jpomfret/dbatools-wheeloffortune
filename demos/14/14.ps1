@@ -14,4 +14,5 @@
 
 #>
 
+# reset and get ready to spin!
 Invoke-DemoReset

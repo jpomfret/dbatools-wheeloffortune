@@ -19,3 +19,6 @@ $params = @{
 New-DbaAvailabilityGroup @params
 
 #TODO: Add some failover things and maybe connection test?
+
+# reset and get ready to spin!
+Invoke-DemoReset

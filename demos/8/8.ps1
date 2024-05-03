@@ -79,3 +79,6 @@ $upgradeSplat = @{
     Database    = "Pubs"
 }
 Invoke-DbaDbUpgrade @upgradeSplat -Force
+
+# reset and get ready to spin!
+Invoke-DemoReset
