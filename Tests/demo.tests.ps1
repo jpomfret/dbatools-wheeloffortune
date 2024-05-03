@@ -7,8 +7,8 @@ Describe "Module is good to go" {
         It "Module was imported" {
             $module | Should Not BeNullOrEmpty
         }
-        It "Module version is 2.1.12" {
-            $module.Version | Should Be "2.1.12"
+        It "Module version is 2.1.14" {
+            $module.Version | Should Be "2.1.14"
         }
         It "Module should import 694 commands" {
             (get-command -module dbatools -CommandType Function | Measure).Count | Should Be 694
@@ -89,7 +89,7 @@ Describe "dbatools2 shouldn't have any databases" {
         $db = Get-DbaDatabase -SqlInstance $dbatools2 -ExcludeSystem
     }
     Context "There should be no databases" {
-        It "Get-DbaDatabase should return nothing" {
+        It "Get-DbaDatabase should return nothing for dbatools2" {
             $db | Should BeNullOrEmpty
         }
     }

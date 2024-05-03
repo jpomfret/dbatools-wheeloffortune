@@ -1,14 +1,6 @@
 # we'll run this between demos to undo anything we might have done..
 
 
-# 7. clean up snapshots
-$snapshotSplat = @{
-    SqlInstance = 'dbatools1'
-    Database    = 'Northwind'
-}
-Get-DbaDbSnapshot @snapshotSplat | Remove-DbaDbSnapshot -Confirm:$false
-
-
 ## 8. migration - bring databases back online on dbatools1
 $onlineSplat = @{
     SqlInstance = 'dbatools1'
@@ -36,5 +28,13 @@ $compatSplat = @{
 Set-DbaDbCompatibility @compatSplat
 
 # 10. 
-# remove the AG
-#TODO: do this
+Remove-DbaAvailabilityGroup -SqlInstance dbatools1, dbatools2 -AvailabilityGroup test-ag -Confirm:$false
+Remove-DbaDatabase -SqlInstance dbatools2 -Database Pubs -Confirm:$false
+
+# 11. clean up snapshots
+$snapshotSplat = @{
+    SqlInstance = 'dbatools1'
+    Database    = 'Northwind'
+}
+Get-DbaDbSnapshot @snapshotSplat | Remove-DbaDbSnapshot -Confirm:$false
+

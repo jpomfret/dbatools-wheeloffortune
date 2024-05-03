@@ -241,7 +241,9 @@ Invoke-DbaQuery -SqlInstance $dbatools2 -Query "declare @oldSrv sysname; select 
 Get-ChildItem ./Export/ | Remove-item -Recurse
 
 # create DatabaseAdmin database
-$null = New-DbaDatabase -SqlInstance $dbatools1 -Name DatabaseAdmin
+if(-not (Get-DbaDatabase -SqlInstance $dbatools1 -Database DatabaseAdmin)) {
+    $null = New-DbaDatabase -SqlInstance $dbatools1 -Name DatabaseAdmin
+}
 
 $northwind = @{
     SqlInstance = $dbatools1
@@ -249,7 +251,9 @@ $northwind = @{
 }
 
 # set recovery model to full
-$null = Set-DbaDbRecoveryModel @northwind -RecoveryModel Full
+if ((Get-DbaDbRecoveryModel  @northwind).RecoveryModel -ne 'Full') {
+    $null = Set-DbaDbRecoveryModel @northwind -RecoveryModel Full
+}
 
 # do some backups
 $null = Backup-DbaDatabase @northwind -Type Full
@@ -259,7 +263,61 @@ $null = Backup-DbaDatabase @northwind -Type Log
 # make sure there are no databases on dbatools2
 $null = Get-DbaDatabase -SQlInstance $dbatools2 -ExcludeSystem | Remove-DbaDatabase -Confirm:$false
 
-# function to open the game file
+
+$startImage = '
+.----------------.  .----------------.  .----------------.  .----------------.  .----------------.                                         
+| .--------------. || .--------------. || .--------------. || .--------------. || .--------------. |                                        
+| | _____  _____ | || |  ____  ____  | || |  _________   | || |  _________   | || |   _____      | |                                        
+| ||_   _||_   _|| || | |_   ||   _| | || | |_   ___  |  | || | |_   ___  |  | || |  |_   _|     | |                                        
+| |  | | /\ | |  | || |   | |__| |   | || |   | |_  \_|  | || |   | |_  \_|  | || |    | |       | |                                        
+| |  | |/  \| |  | || |   |  __  |   | || |   |  _|  _   | || |   |  _|  _   | || |    | |   _   | |                                        
+| |  |   /\   |  | || |  _| |  | |_  | || |  _| |___/ |  | || |  _| |___/ |  | || |   _| |__/ |  | |                                        
+| |  |__/  \__|  | || | |____||____| | || | |_________|  | || | |_________|  | || |  |________|  | |                                        
+| |              | || |              | || |              | || |              | || |              | |                                        
+| .--------------. || .--------------. || .--------------. || .--------------. || .--------------. |                                        
+ .----------------.  .----------------.  .----------------.  .----------------.  .----------------.                                         
+ .----------------.  .----------------.                                                                                                     
+| .--------------. || .--------------. |                                                                                                    
+| |     ____     | || |  _________   | |                                                                                                    
+| |   ..    `.   | || | |_   ___  |  | |                                                                                                    
+| |  /  .--.  \  | || |   | |_  \_|  | |                                                                                                    
+| |  | |    | |  | || |   |  _|      | |                                                                                                    
+| |  \  `--.  /  | || |  _| |_       | |                                                                                                    
+| |   `.____..   | || | |_____|      | |                                                                                                    
+| |              | || |              | |                                                                                                    
+| .--------------. || .--------------. |                                                                                                    
+ .----------------.  .----------------.                                                                                                     
+ .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .-----------------. .----------------. 
+| .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. |
+| |  _________   | || |     ____     | || |  _______     | || |  _________   | || | _____  _____ | || | ____  _____  | || |  _________   | |
+| | |_   ___  |  | || |   ..    `.   | || | |_   __ \    | || | |  _   _  |  | || ||_   _||_   _|| || ||_   \|_   _| | || | |_   ___  |  | |
+| |   | |_  \_|  | || |  /  .--.  \  | || |   | |__) |   | || | |_/ | | \_|  | || |  | |    | |  | || |  |   \ | |   | || |   | |_  \_|  | |
+| |   |  _|      | || |  | |    | |  | || |   |  __ /    | || |     | |      | || |  | .    . |  | || |  | |\ \| |   | || |   |  _|  _   | |
+| |  _| |_       | || |  \  `--.  /  | || |  _| |  \ \_  | || |    _| |_     | || |   \ `--. /   | || | _| |_\   |_  | || |  _| |___/ |  | |
+| | |_____|      | || |   `.____..   | || | |____| |___| | || |   |_____|    | || |    `.__..    | || ||_____|\____| | || | |_________|  | |
+| |              | || |              | || |              | || |              | || |              | || |              | || |              | |
+| .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. |
+ .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------. '
+
+
+ ## run the game
+function Invoke-StartGame {
+    ## run tests
+    $tests = Invoke-Pester .\Tests\demo.tests.ps1 -PassThru -Show Failed
+
+    if ($tests.FailedCount -ne 0) {
+        Write-Output "Tests failed. Please fix the tests before starting the game."
+        return
+    } else {
+        cls
+        $startImage
+        Write-Output "To start the game, run the following command:"
+        $num = Read-Host "Spin the wheel, and enter the number..."
+        Get-DemoFile -number $num
+    }
+}
+
+ # function to open the game file
 function Get-DemoFile {
     param (
         $number
@@ -269,7 +327,17 @@ function Get-DemoFile {
     } catch {
         code-insiders "demos/$number/$number.ps1"
     }
+    cls
 }
 
-## run tests
-Invoke-Pester .\Tests\demo.tests.ps1
+# function to open the game file
+function Invoke-DemoReset {
+    Write-Output "Resetting the demo environment..."
+    . /workspace/demos/reset.ps1
+    
+    Invoke-StartGame
+}
+
+
+## start the game
+Invoke-StartGame

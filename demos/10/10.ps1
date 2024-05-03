@@ -8,7 +8,7 @@
 $params = @{
     Primary = 'dbatools1'
     Secondary = 'dbatools2'
-    Name = "test-ag"
+    Name = "WheelOfFortune"
     Database = "pubs"
     ClusterType = "None"
     SeedingMode = "Automatic"
