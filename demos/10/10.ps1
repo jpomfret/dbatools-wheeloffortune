@@ -4,8 +4,6 @@
 #          Host:                                        #
 #########################################################
 
-#TODO: This isn't working
-
 # setup the variables
 $params = @{
     Primary = 'dbatools1'
@@ -19,3 +17,5 @@ $params = @{
 }
 # execute the command
 New-DbaAvailabilityGroup @params
+
+#TODO: Add some failover things and maybe connection test?
