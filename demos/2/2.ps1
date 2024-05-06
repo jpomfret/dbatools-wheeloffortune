@@ -34,10 +34,16 @@ foreach($inst in @('dbatools1', 'dbatools2')) {
 
 
 # Export result to excel. It uses ImportExcel PowerShell Module from Doug Finke
-# Need to be run outside of the container
-$excelFilePath = "D:\temp\Compliance_$((Get-Date).ToFileTime()).xlsx"
+    # Need to be run outside of the container
+    # $excelFilePath = "D:\temp\Compliance_$((Get-Date).ToFileTime()).xlsx"#
+
+# JP: if you write to the workspace folder here and remove the -Show parameter - you can then just open from the windows side:
+$excelFilePath = "/workspace/export/compliance_$((Get-Date).ToFileTime()).xlsx"
 $results = Test-DbaBuild -SqlInstance dbatools1, dbatools2 -Latest
-$results | Export-Excel -Path $excelFilePath -TableName "data" -TableStyle Medium10 -AutoSize -Show
+$results | Export-Excel -Path $excelFilePath -TableName "data" -TableStyle Medium10 -AutoSize
+
+# open from the cloned folder  on the windows side
+# e.g. C:\GitHub\dbatools-wheeloffortune\export 
 
 # reset and get ready to spin!
 Invoke-DemoReset
