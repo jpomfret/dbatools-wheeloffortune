@@ -8,7 +8,7 @@ $onlineSplat = @{
     Online      = $true
     Force       = $true
 }
-Set-DbaDbState @onlineSplat
+$null = Set-DbaDbState @onlineSplat
 
 # 8. migration - remove databases from dbatools2
 $removeSplat = @{
@@ -16,7 +16,7 @@ $removeSplat = @{
     Database    = "Northwind", "DatabaseAdmin", "Pubs"
     Confirm     = $false
 }
-Remove-DbaDatabase @removeSplat
+$null = Remove-DbaDatabase @removeSplat
 
 # 9. compat levels - reset to 130
 ## Upgrade the compatibility level
@@ -25,16 +25,16 @@ $compatSplat = @{
     Database    = 'Northwind', 'Pubs'
     Compatibility = 130
 }
-Set-DbaDbCompatibility @compatSplat
+$null = Set-DbaDbCompatibility @compatSplat
 
 # 10. 
-Remove-DbaAvailabilityGroup -SqlInstance dbatools1, dbatools2 -AvailabilityGroup test-ag -Confirm:$false
-Remove-DbaDatabase -SqlInstance dbatools2 -Database Pubs -Confirm:$false
+$null = Remove-DbaAvailabilityGroup -SqlInstance dbatools1, dbatools2 -AvailabilityGroup test-ag -Confirm:$false
+$null = Remove-DbaDatabase -SqlInstance dbatools2 -Database Pubs -Confirm:$false
 
 # 11. clean up snapshots
 $snapshotSplat = @{
     SqlInstance = 'dbatools1'
     Database    = 'Northwind'
 }
-Get-DbaDbSnapshot @snapshotSplat | Remove-DbaDbSnapshot -Confirm:$false
+$null = Get-DbaDbSnapshot @snapshotSplat | Remove-DbaDbSnapshot -Confirm:$false
 
