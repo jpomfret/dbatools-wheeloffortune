@@ -309,10 +309,22 @@ function Invoke-StartGame {
         Write-Output "Tests failed. Please fix the tests before starting the game."
         return
     } else {
-        cls
+        Clear-Host
         $startImage
+        
+        # get the highest demo we have
+        $numberFolders = (Get-ChildItem ./demos -Directory | Where-Object { $_.Name -match '^\d+$' }).name | measure -Maximum -Minimum
         Write-Output "To start the game, run the following command:"
-        $num = Read-Host "Spin the wheel, and enter the number..."
+        [int]$num = Read-Host "Spin the wheel, and enter the number..."
+                
+        while(-not ([int]$num -ge [int]$numberFolders.Minimum -and [int]$num -le [int]$numberFolders.Maximum)) {
+            Write-Host "That demo doesn't exist yet. Please spin again." -ForegroundColor Red
+            Start-Sleep -Seconds 1
+            
+            Write-Output "To start the game, run the following command:"
+            [int]$num = Read-Host "Spin the wheel, and enter the number..."
+        }
+
         Get-DemoFile -number $num
     }
 }
