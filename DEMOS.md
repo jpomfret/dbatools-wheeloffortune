@@ -14,11 +14,11 @@ This is a list for us to keep track of what we've added:
 10. Create an availability group
 11. Snapshots
 12. Generate Login/Users report 
-13. Replication (Add articles/filtered ones)
+13. Execute a folder of scripts
 14. <-->
 15. Find Objects Owned by specific user
-16. Add logins from central source
-17. Database refresh
-18. Truncate tables (export FKs, truncate, recreate)
-19. Find / Get-DbaDBStoredProcedure (Views?)
+16. Truncate tables (export FKs, truncate, recreate)
+17. Database refresh <-- #TODO
+18. Add logins from central source
+19. Create a HTML report with dbatools
 20. Import-DbaCSV (Blazing fast imports)
