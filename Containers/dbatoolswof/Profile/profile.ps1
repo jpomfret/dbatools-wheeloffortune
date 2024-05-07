@@ -245,20 +245,20 @@ if(-not (Get-DbaDatabase -SqlInstance $dbatools1 -Database DatabaseAdmin)) {
     $null = New-DbaDatabase -SqlInstance $dbatools1 -Name DatabaseAdmin
 }
 
-$backups = @{
+$dbs = @{
     SqlInstance = $dbatools1
     Database    = 'Northwind','Pubs'
 }
 
 # set recovery model to full
-if ((Get-DbaDbRecoveryModel  @northwind).RecoveryModel -ne 'Full') {
-    $null = Set-DbaDbRecoveryModel @northwind -RecoveryModel Full
+if ((Get-DbaDbRecoveryModel @dbs).RecoveryModel -ne 'Full') {
+    $null = Set-DbaDbRecoveryModel @dbs -RecoveryModel Full
 }
 
-# do some backups - stash the fulls incase we need to restore
-$global:fullBackup = Backup-DbaDatabase @backups -Type Full
-$null = Backup-DbaDatabase @backups -Type Differential
-$null = Backup-DbaDatabase @backups -Type Log
+# do some backups - stash the full incase we need to restore
+$global:fullBackup = Backup-DbaDatabase @dbs -Type Full
+$null = Backup-DbaDatabase @dbs -Type Differential
+$null = Backup-DbaDatabase @dbs -Type Log
 
 # make sure there are no databases on dbatools2
 $null = Get-DbaDatabase -SQlInstance $dbatools2 -ExcludeSystem | Remove-DbaDatabase -Confirm:$false
