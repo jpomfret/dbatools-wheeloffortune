@@ -82,6 +82,12 @@ Describe "dbatools1 databases are good" {
             $DatabaseAdmin.Compatibility | Should Be 150
         }
     }
+    Context "PubsV2 shouldn't exist" {
+        $PubsV2 = $db | where name -eq 'PubsV2'
+        It "PubsV2 is not there" {
+            $PubsV2 | Should BeNullOrEmpty
+        }
+    }
 }
 
 Describe "dbatools2 shouldn't have any databases" {

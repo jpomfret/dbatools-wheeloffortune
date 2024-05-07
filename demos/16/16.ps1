@@ -8,6 +8,15 @@ $SqlInstance = 'dbatools1'
 $database = 'pubs'
 $tempFolder = '/workspace/demos/16/'
 
+#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
+# TWO DEMOS FOR THE PRICE OF ONE!!
+
+# First things first - lets make a copy of this database to test on
+Copy-DbaDatabase -Source $SqlInstance -Database $database -Destination $SqlInstance -NewName 'pubsV2' -BackupRestore -SharedPath /Shared
+#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
+
+# Alright back to the real demo
+$database = 'pubsV2'
 # we're going to use SMO objects so let's connect to the instance
 $svr = Connect-DbaInstance -SqlInstance $SqlInstance
 

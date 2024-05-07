@@ -38,3 +38,21 @@ $snapshotSplat = @{
 }
 $null = Get-DbaDbSnapshot @snapshotSplat | Remove-DbaDbSnapshot -Confirm:$false
 
+#13. run a folder of scripts
+$null = Remove-DbaDatabase -SqlInstance dbatools1 -Database PubsV2 -Confirm:$false
+$null = Get-ChildItem ./demos/13 *.sql | Remove-Item
+
+# 16. truncate all the tables
+$null = Restore-DbaDatabase -SqlInstance dbatools1 -Path ($global:fullBackup | Where-Object database -eq 'pubs').path -DatabaseName pubs -WithReplace
+
+#18 - remove users
+$null = Remove-DbaDbUser -SqlInstance dbatools1 -User JessP -Database DatabaseAdmin -Confirm:$false
+$null = Remove-DbaLogin -SqlInstance dbatools1 -Login JessP -Confirm:$false
+
+(Import-Csv ./demos/18/users.csv).foreach{
+    $null = Remove-DbaDbUser -SqlInstance $psitem.Server -User $psitem.User -Database $psitem.Database -Confirm:$false
+    $null = Remove-DbaLogin -SqlInstance $psitem.Server -Login $psitem.User -Confirm:$false
+}
+
+# 19. remove file
+Get-ChildItem ./demos/19/test.HTML | Remove-Item
