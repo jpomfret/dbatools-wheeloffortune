@@ -40,7 +40,8 @@ SHELL ["/usr/bin/pwsh", "-c"]
 RUN Set-DbatoolsConfig -Name sql.connection.trustcert -Value $true -passthru | Register-DbatoolsConfig; Set-DbatoolsConfig -Name sql.connection.encrypt -Value $false -passthru | Register-DbatoolsConfig
 
 # set permissions on /shared
-RUN chown -R mssql /shared; chmod -R 750 /shared 
+RUN chown -R mssql /shared \
+    && chmod -R 750 /shared 
 
 # Copy Profile
 COPY Profile/profile.ps1 /root/.config/powershell/Microsoft.PowerShell_profile.ps1
