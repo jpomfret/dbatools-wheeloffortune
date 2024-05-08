@@ -245,6 +245,34 @@ if(-not (Get-DbaDatabase -SqlInstance $dbatools1 -Database DatabaseAdmin)) {
     $null = New-DbaDatabase -SqlInstance $dbatools1 -Name DatabaseAdmin
 }
 
+# Begin ToTestRefresh preparation
+if(-not (Get-DbaDatabase -SqlInstance $dbatools1 -Database ToTestRefresh)) {
+    $null = New-DbaDatabase -SqlInstance $dbatools1 -Name ToTestRefresh -RecoveryModel Simple
+}
+
+if(-not (Get-DbaLogin -SqlInstance $dbatools1 -Login PRODLogin)) {
+    $null = New-DbaLogin -SqlInstance $dbatools1 -Login PRODLogin -SecurePassword $securePassword
+}
+
+if(-not (Get-DbaDbUser -SqlInstance $dbatools1 -Database ToTestRefresh -Login PRODLogin)) {
+    $null = New-DbaDbUser -SqlInstance $dbatools1 -Database ToTestRefresh -Username PRODLogin -Login PRODLogin
+}
+
+$toRefreshDemoCode = @"
+CREATE TABLE [dbo].[TestTable] (
+    [ID] INT IDENTITY(1,1) PRIMARY KEY,
+    [Name] NVARCHAR(100) NOT NULL
+)
+
+INSERT INTO [dbo].[TestTable] ([Name])
+SELECT 'Data Grillen'
+
+GRANT SELECT, INSERT, UPDATE, DELETE ON [dbo].[TestTable] TO [PRODLogin]
+"@
+
+Invoke-DbaQuery -SqlInstance dbatools1 -Query $toRefreshDemoCode
+# End ToTestRefresh preparation
+
 $dbs = @{
     SqlInstance = $dbatools1
     Database    = 'Northwind','Pubs'
