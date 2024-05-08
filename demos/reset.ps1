@@ -45,6 +45,9 @@ $null = Get-ChildItem ./demos/13 *.sql | Remove-Item
 # 16. truncate all the tables
 $null = Restore-DbaDatabase -SqlInstance dbatools1 -Path ($global:fullBackup | Where-Object database -eq 'pubs').path -DatabaseName pubs -WithReplace
 
+# 17. Truncate table
+$null = Invoke-DbaQuery -SqlInstance dbatools2 -Database ToTestRefresh -Query "TRUNCATE TABLE dbo.ToTestRefresh"
+
 #18 - remove users
 $null = Remove-DbaDbUser -SqlInstance dbatools1 -User JessP -Database DatabaseAdmin -Confirm:$false
 $null = Remove-DbaLogin -SqlInstance dbatools1 -Login JessP -Confirm:$false
