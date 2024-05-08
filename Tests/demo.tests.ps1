@@ -90,13 +90,17 @@ Describe "dbatools1 databases are good" {
     }
 }
 
-Describe "dbatools2 shouldn't have any databases" {
+Describe "dbatools2 should only have 1 database" {
     BeforeAll {
         $db = Get-DbaDatabase -SqlInstance $dbatools2 -ExcludeSystem
     }
-    Context "There should be no databases" {
+    Context "There should be only 1 databases" {
+        It "Get-DbaDatabase should return 1 database for dbatools2" {
+            $db.Count | Should Be 1
+        }
+
         It "Get-DbaDatabase should return nothing for dbatools2" {
-            $db | Should BeNullOrEmpty
+            $db.Name | Should Be 'ToTestRefresh'
         }
     }
 }
