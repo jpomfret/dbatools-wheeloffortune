@@ -288,9 +288,6 @@ $global:fullBackup = Backup-DbaDatabase @dbs -Type Full
 $null = Backup-DbaDatabase @dbs -Type Differential
 $null = Backup-DbaDatabase @dbs -Type Log
 
-# make sure there are no databases on dbatools2
-$null = Get-DbaDatabase -SQlInstance $dbatools2 -ExcludeSystem | Remove-DbaDatabase -Confirm:$false
-
 $startImage = '
 .----------------.  .----------------.  .----------------.  .----------------.  .----------------.                                         
 | .--------------. || .--------------. || .--------------. || .--------------. || .--------------. |                                        
