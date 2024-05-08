@@ -45,7 +45,7 @@ COPY --from=builder /opt/mssql-tools/bin /opt/mssql-tools/bin
 USER root
 RUN  mkdir /shared; chown mssql /shared
 
-# run a rootless container
-USER mssql
+# running as root because of permission weirdness TODO: change back to `USER mssql`
+USER root
 ENTRYPOINT /opt/mssql/bin/sqlservr
 # CMD exec /bin/bash -c "trap : TERM INT; sleep infinity & wait"
