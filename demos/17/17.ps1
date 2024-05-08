@@ -50,7 +50,7 @@ Get-DbaDbOrphanUser -SqlInstance dbatools2 -Database $databaseToRefresh -Verbose
 # Connect as QALogin and try to select some data
 # Test connect as QALogin and select table where it does not have permissions
 $cred_QA = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList "QALogin", "dbatools.IO"
-Invoke-DbaQuery -SqlInstance $dbatools2 -SqlCredential $cred_QA -Database $databaseToRefresh -Query "SELECT TOP 5 SUSER_NAME(), * FROM dbo.ToTestRefress"
+Invoke-DbaQuery -SqlInstance $dbatools2 -SqlCredential $cred_QA -Database $databaseToRefresh -Query "SELECT TOP 5 SUSER_NAME(), * FROM dbo.ToTestRefresh"
 
 
 
