@@ -10,11 +10,11 @@ done
 # create sqladmin with dbatools.IO password and disable sa
 sqlcmd -S localhost -d master -i /tmp/create-admin.sql
 
-# create QALogin and database for refresh demo
-sqlcmd -S localhost -d master -i /tmp/create-dbtorefresh.sql
-
 # change the default login to sqladmin instead of sa
 export SQLCMDUSER=sqladmin
+
+# create QALogin and database for refresh demo
+sqlcmd -S localhost -d master -i /tmp/create-dbtorefresh.sql
 
 # rename the server 
 sqlcmd -d master -Q "EXEC sp_dropserver @@SERVERNAME"
