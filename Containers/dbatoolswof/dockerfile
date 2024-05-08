@@ -42,4 +42,7 @@ RUN Set-DbatoolsConfig -Name sql.connection.trustcert -Value $true -passthru | R
 # Copy Profile
 COPY Profile/profile.ps1 /root/.config/powershell/Microsoft.PowerShell_profile.ps1
 
+# set permissions on /shared
+RUN chown -R mssql /shared
+
 USER mssql
