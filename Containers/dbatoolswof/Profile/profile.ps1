@@ -270,7 +270,7 @@ SELECT 'Data Grillen'
 GRANT SELECT, INSERT, UPDATE, DELETE ON [dbo].[TestTable] TO [PRODLogin]
 "@
 
-Invoke-DbaQuery -SqlInstance dbatools1 -Query $toRefreshDemoCode
+Invoke-DbaQuery -SqlInstance dbatools1 -Database "ToTestRefresh" -Query $toRefreshDemoCode
 # End ToTestRefresh preparation
 
 $dbs = @{
