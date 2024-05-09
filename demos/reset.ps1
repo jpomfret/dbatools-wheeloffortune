@@ -58,4 +58,4 @@ $null = Remove-DbaLogin -SqlInstance dbatools1 -Login JessP -Confirm:$false
 }
 
 # 19. remove file
-Get-ChildItem ./demos/19/test.HTML | Remove-Item
+Get-ChildItem ./demos/19/test.HTML -ErrorAction SilentlyContinue | Remove-Item 
