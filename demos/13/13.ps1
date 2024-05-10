@@ -1,10 +1,10 @@
 #########################################################
 #          dbatools: Wheel of Fortune                   #
 #          Demo: 13 - Execute a folder of scripts       #
-#          Host:                                        #
+#          Host: Jess                                   #
 #########################################################
 
-$folderPath = './demos/13/'
+$folderPath = './export/'
 $SqlInstance = 'dbatools1'
 $sourceDatabase = 'Pubs'
 $destinationDatabase = 'PubsV2'

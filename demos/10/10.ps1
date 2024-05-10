@@ -1,7 +1,7 @@
 #########################################################
 #          dbatools: Wheel of Fortune                   #
 #          Demo: 10 - Create an Availability Group      #
-#          Host:                                        #
+#          Host: Jess                                   #
 #########################################################
 
 # setup the variables

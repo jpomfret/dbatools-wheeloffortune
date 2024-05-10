@@ -1,7 +1,7 @@
 #########################################################
 #          dbatools: Wheel of Fortune                   #
 #          Demo: 15 - Find Objects Owned by a user      #
-#          Host:                                        #
+#          Host: Cláudio                                #
 #########################################################
 
 # If you want to read more about a real use case, check this blog post: 

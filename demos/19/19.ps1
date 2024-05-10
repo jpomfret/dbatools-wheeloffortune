@@ -1,7 +1,7 @@
 #########################################################
 #          dbatools: Wheel of Fortune                   #
-#          Demo: 15 -                                   #
-#          Host:                                        #
+#          Demo: 19 - HTML Report                       #
+#          Host: Jess                                   #
 #########################################################
 
 ## Using PSHTML to create great looking email reports
@@ -93,7 +93,7 @@ if ($results) {
     }
 
     # You can output it as a html file to review how it looks
-    $html > ./demos/19/test.HTML
+    $html > ./export/test.HTML
 
    # try {
    #     $emailSplat = @{
@@ -109,5 +109,7 @@ if ($results) {
    #     Stop-PSFFunction -Message ('Failed to send email') -ErrorRecord $_
    # }
 }
+
+
 # reset and get ready to spin!
 Invoke-DemoReset

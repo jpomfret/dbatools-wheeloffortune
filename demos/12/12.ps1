@@ -1,7 +1,7 @@
 #########################################################
 #          dbatools: Wheel of Fortune                   #
 #          Demo: 12 - Generate Login/Users report       #
-#          Host:                                        #
+#          Host: Cláudio                                #
 #########################################################
 
 $excludeDatabase = "myDB", "myDB2"
@@ -43,7 +43,6 @@ $excelLoginSplatting = @{
     TableName = "Logins"
     FreezeTopRow = $freezeTopRow
     TableStyle = $tableStyle
-    AutoSize = $autoSize
 }
 $Logins | Select-Object "ComputerName", "InstanceName", "SqlInstance", "Name", "LoginType", "CreateDate", "LastLogin", "HasAccess", "IsLocked", "IsDisabled" | Export-Excel @excelLoginSplatting
 

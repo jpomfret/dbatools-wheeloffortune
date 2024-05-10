@@ -1,7 +1,7 @@
 #########################################################
 #          dbatools: Wheel of Fortune                   #
-#          Demo: 15 - Refresh database PROD -> QA       #
-#          Host:                                        #
+#          Demo: 17 - Refresh database PROD -> QA       #
+#          Host: Cláudio                                #
 #########################################################
 
 $databaseToRefresh = "ToTestRefresh"

@@ -1,12 +1,12 @@
 #########################################################
 #          dbatools: Wheel of Fortune                   #
 #          Demo: 19 - Truncate all the tables           #
-#          Host:                                        #
+#          Host: Jess                                   #
 #########################################################
 
 $SqlInstance = 'dbatools1'
 $database = 'pubs'
-$tempFolder = '/workspace/demos/16/'
+$tempFolder = './export/'
 
 #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
 # TWO DEMOS FOR THE PRICE OF ONE!!

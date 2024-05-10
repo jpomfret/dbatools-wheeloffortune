@@ -1,7 +1,7 @@
 #########################################################
 #          dbatools: Wheel of Fortune                   #
 #          Demo: 9 - Check compatibility levels         #
-#          Host:                                        #
+#          Host: Jess                                   #
 #########################################################
 
 $instanceSplat = @{
