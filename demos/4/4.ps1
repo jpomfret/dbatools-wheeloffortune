@@ -1,10 +1,10 @@
 #########################################################
 #          dbatools: Wheel of Fortune                   #
-#          Demo: 4 -                                    #
-#          Host:                                        #
+#          Demo: 4 - Export-DbaInstance                 #
+#          Host: Cláudio                                #
 #########################################################
 
-$path = "./demos/4"
+$path = "./export/4"
 
 # Export instance configuration
 $splatExportInstance = @{

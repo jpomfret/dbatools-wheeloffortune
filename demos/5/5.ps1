@@ -1,7 +1,7 @@
 #########################################################
 #          dbatools: Wheel of Fortune                   #
 #          Demo: 5 - Copy data between tables           #
-#          Host:                                        #
+#          Host: Cláudio                                #
 #########################################################
 
 # Set some variables

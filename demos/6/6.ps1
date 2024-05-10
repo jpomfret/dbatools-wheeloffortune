@@ -1,7 +1,7 @@
 #########################################################
 #          dbatools: Wheel of Fortune                   #
 #          Demo: 6 - Backups & Backup Testing           #
-#          Host:                                        #
+#          Host: Jess                                   #
 #########################################################
 
 
@@ -36,6 +36,9 @@ $writeParams = @{
     AutoCreateTable = $true
 }
 $results | Write-DbaDataTable @writeParams
+
+## Check the results
+Invoke-DbaQuery -SqlInstance dbatools1 -Database "DatabaseAdmin" -Query "SELECT * FROM dbo.TestRestore" | Format-Table
 
 # reset and get ready to spin!
 Invoke-DemoReset

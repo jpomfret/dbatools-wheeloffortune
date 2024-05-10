@@ -40,7 +40,7 @@ foreach($inst in @('dbatools1', 'dbatools2')) {
 # JP: if you write to the workspace folder here and remove the -Show parameter - you can then just open from the windows side:
 $excelFilePath = "/workspace/export/compliance_$((Get-Date).ToFileTime()).xlsx"
 $results = Test-DbaBuild -SqlInstance dbatools1, dbatools2 -Latest
-$results | Export-Excel -Path $excelFilePath -TableName "data" -TableStyle Medium10 -AutoSize
+$results | Export-Excel -Path $excelFilePath -TableName "data" -TableStyle Medium10
 
 # open from the cloned folder  on the windows side
 # e.g. C:\GitHub\dbatools-wheeloffortune\export 

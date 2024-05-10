@@ -18,7 +18,7 @@ This is a list for us to keep track of what we've added:
 14. <-->
 15. Find Objects Owned by specific user
 16. Truncate tables (export FKs, truncate, recreate)
-17. Database refresh <-- #TODO
+17. Database refresh
 18. Add logins from central source
 19. Create a HTML report with dbatools
 20. Import-DbaCSV (Blazing fast imports)

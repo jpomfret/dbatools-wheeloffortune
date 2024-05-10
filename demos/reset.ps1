@@ -1,5 +1,12 @@
 # we'll run this between demos to undo anything we might have done..
 
+# 5. Copy data - Remove EmptyNorthwind database
+$removeSplat = @{
+    SqlInstance = 'dbatools2'
+    Database    = "EmptyNorthwind"
+    Confirm     = $false
+}
+$null = Remove-DbaDatabase @removeSplat
 
 ## 8. migration - bring databases back online on dbatools1
 $onlineSplat = @{
@@ -58,4 +65,7 @@ $null = Remove-DbaLogin -SqlInstance dbatools1 -Login JessP -Confirm:$false
 }
 
 # 19. remove file
-Get-ChildItem ./demos/19/test.HTML -ErrorAction SilentlyContinue | Remove-Item 
+Get-ChildItem ./demos/19/test.HTML -ErrorAction SilentlyContinue | Remove-Item
+
+# all - Clear export folder
+Get-ChildItem ./export -Recurse -ErrorAction SilentlyContinue | Remove-Item -Recurse
