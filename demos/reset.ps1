@@ -13,6 +13,12 @@ if (($dbs | where name -eq 'Northwind').Status -ne 'Normal') {
     $null = Restore-DbaDatabase -Sqlinstance dbatools1 -Database Northwind -Recover
 }
 
+# 3. whoisactive
+$whoisFolder = '/root/.local/share//PowerShell/dbatools/WhoIsActive'
+if(test-path $whoisFolder) {
+    Remove-Item $whoisFolder -Recurse
+}
+
 # 5. Copy data - Remove EmptyNorthwind database
 $removeSplat = @{
     SqlInstance = 'dbatools2'

@@ -17,7 +17,9 @@ New-DbaDbSnapshot @snapshotSplat
 # view snapshots
 Get-DbaDbSnapshot @snapshotSplat
 
+#################################
 # go and make some rogue changes
+#################################
 
 # kill processes to allow us to revert snapshot
 Get-DbaProcess @snapshotSplat | Format-Table SqlInstance, Spid, Login, Host, Database, Command
