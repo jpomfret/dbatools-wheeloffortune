@@ -25,6 +25,11 @@ Import-Module Pansies
 Import-Module posh-git
 Import-Module dbatools
 Import-Module dbachecks
+Import-Module ImportExcel
+
+# first time it runs it warns about the libraries
+$test | Export-Excel -Path .\export\test.xlsx -WarningVariable warn
+Remove-Item .\export\test.xlsx 
 
 $ShowError = $false
 $ShowKube = $false
@@ -259,6 +264,8 @@ if(-not (Get-DbaDbUser -SqlInstance $dbatools1 -Database ToTestRefresh -Login PR
 }
 
 $toRefreshDemoCode = @"
+DROP TABLE IF EXISTS [dbo].[TestTable]
+
 CREATE TABLE [dbo].[TestTable] (
     [ID] INT IDENTITY(1,1) PRIMARY KEY,
     [Name] NVARCHAR(100) NOT NULL
