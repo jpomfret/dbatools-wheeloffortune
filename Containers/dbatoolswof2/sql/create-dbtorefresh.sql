@@ -34,3 +34,6 @@ GO
 
 GRANT SELECT, INSERT, UPDATE, DELETE ON [dbo].[TestTable] TO [QALogin]
 GO
+
+ALTER ROLE [db_datawriter] ADD MEMBER [QALogin]
+GO

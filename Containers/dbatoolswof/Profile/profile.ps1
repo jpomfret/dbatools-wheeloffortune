@@ -275,6 +275,8 @@ INSERT INTO [dbo].[TestTable] ([Name])
 SELECT 'Data Grillen'
 
 GRANT SELECT, INSERT, UPDATE, DELETE ON [dbo].[TestTable] TO [PRODLogin]
+
+ALTER ROLE [db_datawriter] ADD MEMBER [PRODLogin]
 "@
 
 Invoke-DbaQuery -SqlInstance dbatools1 -Database "ToTestRefresh" -Query $toRefreshDemoCode
