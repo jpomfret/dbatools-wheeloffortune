@@ -19,7 +19,8 @@ Install-DbaWhoIsActive -SqlInstance dbatools1, dbatools2 -Database $databaseToDe
 
 #ToDo: Check file permissions: 
 # WARNING: [14:32:19][Install-DbaWhoIsActive] Failed to update local cached copy | You do not have sufficient access rights to perform this operation or the item is hidden, system, or read only.
-
+# we have to remove this folder during the demo - something permissions related ¯\_(ツ)_/¯
+Remove-Item  '/root/.local/share/PowerShell/dbatools/WhoIsActive' -Recurse -Force
 
 # If you have a file version of it (or without Internet access)
 $deploySplat = @{
