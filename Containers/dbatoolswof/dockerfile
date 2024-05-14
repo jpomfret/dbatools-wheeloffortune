@@ -46,6 +46,11 @@ COPY --from=builder /tmp/post-entrypoint.sh /opt/mssql/bin/post-entrypoint.sh
 USER root
 RUN  mkdir /shared; chown mssql /shared
 
+# run a rootless container
+USER root
+# create a new database if env var is set
+ENTRYPOINT /opt/mssql/bin/sqlservr & /opt/mssql/bin/post-entrypoint.sh
+
 # Install PowerShell
 RUN apt-get update && apt install -y powershell
 # install git
@@ -87,7 +92,3 @@ RUN Set-DbatoolsConfig -Name sql.connection.trustcert -Value $true -passthru | R
 # Copy Profile
 COPY Profile/profile.ps1 /root/.config/powershell/Microsoft.PowerShell_profile.ps1
 
-# run a rootless container
-USER root
-# create a new database if env var is set
-ENTRYPOINT /opt/mssql/bin/sqlservr & /opt/mssql/bin/post-entrypoint.sh
