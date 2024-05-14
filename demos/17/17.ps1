@@ -19,8 +19,9 @@ Invoke-DbaQuery -SqlInstance dbatools2 -SqlCredential $cred_QA -Database $databa
 
 # 1 - Export users on destination
 # Export all users from the specific database and its permissions at database-roles and object level
-$usersExport = Export-DbaUser -SqlInstance dbatools2 -Database $databaseToRefresh -Passthru
+Export-DbaUser -SqlInstance dbatools2 -Database $databaseToRefresh -FilePath './export/users.sql'
 
+$usersExport = Get-Content './export/users.sql' -Raw
 
 # Variable content
 $usersExport
