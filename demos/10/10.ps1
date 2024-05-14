@@ -28,6 +28,9 @@ $addDb = @{
 }
 Add-DbaAgDatabase @addDb
 
+# view the ag
+Get-DbaAvailabilityGroup -SqlInstance dbatools1
+
 # nice graceful failover
 Invoke-DbaAgFailover -SqlInstance dbatools2 -AvailabilityGroup WheelOfFortune
 
@@ -35,6 +38,12 @@ Invoke-DbaAgFailover -SqlInstance dbatools2 -AvailabilityGroup WheelOfFortune
 # Cannot failover an availability replica for availability group 'WheelOfFortune' since it has CLUSTER_TYPE = NONE. Only force failover is supported in this version of SQL Server.
 
 # force failover
+Invoke-DbaAgFailover -SqlInstance dbatools2 -AvailabilityGroup WheelOfFortune -Force
+
+# view the ag
+Get-DbaAvailabilityGroup -SqlInstance dbatools1
+
+# force failover back to 1
 Invoke-DbaAgFailover -SqlInstance dbatools2 -AvailabilityGroup WheelOfFortune -Force
 
 # reset and get ready to spin!
