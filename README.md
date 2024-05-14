@@ -26,3 +26,10 @@ Demos could include:
 - Patching SQL Servers
 - Finding objects
 - and others - who knows where the wheel may take us
+
+## Checklist
+- dev container built
+- `c:\github` folder open in explorer
+- be connected to the internet
+- open SSMS
+- post its for chairs to select people
