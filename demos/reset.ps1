@@ -1,5 +1,12 @@
 # we'll run this between demos to undo anything we might have done..
 
+# 10. Ag - if we have an ag we need to get rid of that first 
+$null = Remove-DbaAvailabilityGroup -SqlInstance dbatools1, dbatools2 -AvailabilityGroup WheelOfFortune -Confirm:$false
+$null = Remove-DbaDatabase -SqlInstance dbatools2 -Database Pubs, Northwind -Confirm:$false
+
+# bring databases on dbatools1 online if they aren't
+$null = Restore-DbaDatabase -Sqlinstance dbatools1 -Database Pubs, Northwind -Recover
+
 # 5. Copy data - Remove EmptyNorthwind database
 $removeSplat = @{
     SqlInstance = 'dbatools2'
@@ -34,9 +41,6 @@ $compatSplat = @{
 }
 $null = Set-DbaDbCompatibility @compatSplat
 
-# 10. 
-$null = Remove-DbaAvailabilityGroup -SqlInstance dbatools1, dbatools2 -AvailabilityGroup test-ag -Confirm:$false
-$null = Remove-DbaDatabase -SqlInstance dbatools2 -Database Pubs -Confirm:$false
 
 # 11. clean up snapshots
 $snapshotSplat = @{
