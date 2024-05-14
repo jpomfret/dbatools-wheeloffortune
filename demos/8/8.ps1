@@ -26,8 +26,8 @@ Select-Object SqlInstance, Name, LoginType
 
 # Get Processes
 $processSplat = @{
-    SqlInstance = 'dbatools1'
-    Database    = "DatabaseAdmin"
+    SqlInstance = 'dbatools2'
+    ExcludeSystemSpids = $true
 }
 Get-DbaProcess @processSplat |
 Select-Object Host, login, Program
