@@ -1,7 +1,7 @@
 #########################################################
 #          dbatools: Wheel of Fortune                   #
 #          Demo: 11 - Snapshots                         #
-#          Host: Jes                                    #
+#          Host: Jess                                   #
 #########################################################
 
 ## Take a snapshot

@@ -1,14 +1,14 @@
 #########################################################
 #          dbatools: Wheel of Fortune                   #
 #          Demo: 2 - Test instance compliance           #
-#          Host:                                        #
+#          Host: Cláudio                                #
 #########################################################
 
 # Test compliance of 1 instance
 Test-DbaBuild -SqlInstance dbatools1 -Latest
 
 # Test compliance for 2 instances
-Test-DbaBuild -SqlInstance dbatools1, dbatools2 -Latest | FT
+Test-DbaBuild -SqlInstance dbatools1, dbatools2 -Latest | Format-Table
 
 # Test if we aren't more than 1CU behind
 Test-DbaBuild -SqlInstance dbatools1 -MaxBehind 1CU

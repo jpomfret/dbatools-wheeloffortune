@@ -1,6 +1,6 @@
 #########################################################
 #          dbatools: Wheel of Fortune                   #
-#          Demo: 19 - Truncate all the tables           #
+#          Demo: 16 - Truncate all the tables           #
 #          Host: Jess                                   #
 #########################################################
 

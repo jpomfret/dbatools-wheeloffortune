@@ -1,7 +1,7 @@
 #########################################################
 #          dbatools: Wheel of Fortune                   #
 #          Demo: 3 - Deploy sp_WhoIsActive              #
-#          Host:                                        #
+#          Host: Cláudio                                #
 #########################################################
 
 # Deploy sp_whoIsActive across instances
