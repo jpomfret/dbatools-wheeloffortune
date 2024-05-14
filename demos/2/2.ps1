@@ -32,12 +32,9 @@ foreach($inst in @('dbatools1', 'dbatools2')) {
     Test-DbaBuild -SqlInstance $inst -MinimumBuild $mapping[$ref.NameLevel]
 }
 
-
 # Export result to excel. It uses ImportExcel PowerShell Module from Doug Finke
-    # Need to be run outside of the container
     # $excelFilePath = "D:\temp\Compliance_$((Get-Date).ToFileTime()).xlsx"#
 
-# JP: if you write to the workspace folder here and remove the -Show parameter - you can then just open from the windows side:
 $excelFilePath = "/workspace/export/compliance_$((Get-Date).ToFileTime()).xlsx"
 $results = Test-DbaBuild -SqlInstance dbatools1, dbatools2 -Latest
 $results | Export-Excel -Path $excelFilePath -TableName "data" -TableStyle Medium10
