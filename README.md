@@ -33,3 +33,4 @@ Demos could include:
 - be connected to the internet
 - open SSMS
 - post its for chairs to select people
+- zoomit running
