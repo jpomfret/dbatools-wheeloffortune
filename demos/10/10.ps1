@@ -44,7 +44,7 @@ Invoke-DbaAgFailover -SqlInstance dbatools2 -AvailabilityGroup WheelOfFortune -F
 Get-DbaAvailabilityGroup -SqlInstance dbatools1
 
 # force failover back to 1
-Invoke-DbaAgFailover -SqlInstance dbatools2 -AvailabilityGroup WheelOfFortune -Force
+Invoke-DbaAgFailover -SqlInstance dbatools1 -AvailabilityGroup WheelOfFortune -Force
 
 # reset and get ready to spin!
 Invoke-DemoReset

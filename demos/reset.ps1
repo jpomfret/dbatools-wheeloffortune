@@ -5,7 +5,13 @@ $null = Remove-DbaAvailabilityGroup -SqlInstance dbatools1, dbatools2 -Availabil
 $null = Remove-DbaDatabase -SqlInstance dbatools2 -Database Pubs, Northwind -Confirm:$false
 
 # bring databases on dbatools1 online if they aren't
-$null = Restore-DbaDatabase -Sqlinstance dbatools1 -Database Pubs, Northwind -Recover
+$dbs = Get-DbaDatabase -Sqlinstance dbatools1 -Database Pubs, Northwind
+if (($dbs | where name -eq 'pubs').Status -ne 'Normal') {
+    $null = Restore-DbaDatabase -Sqlinstance dbatools1 -Database Pubs -Recover
+}
+if (($dbs | where name -eq 'Northwind').Status -ne 'Normal') {
+    $null = Restore-DbaDatabase -Sqlinstance dbatools1 -Database Northwind -Recover
+}
 
 # 5. Copy data - Remove EmptyNorthwind database
 $removeSplat = @{
