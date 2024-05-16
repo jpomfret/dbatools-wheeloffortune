@@ -7,13 +7,12 @@
 $excludeDatabase = "myDB", "myDB2"
 $excludeLogin = "renamedSA"
 $excludeLoginFilter = "NT *", "##*"
-$SQLInstance = "dbatools1"
+$SQLInstance = "dbatools1", "dbatools2"
 
 # To be used on Export-Excel command
 $excelFilepath = "./export/$($SQLInstance -replace ',', '')_$((Get-Date).ToFileTime()).xlsx"
 $freezeTopRow = $true
 $tableStyle = "Medium6"
-$autoSize = $true
 
 
 #Region Get data
@@ -53,7 +52,6 @@ $excelinstanceRoleMembersOutput = @{
     TableName = "InstanceLevel"
     TableStyle = $tableStyle
     FreezeTopRow = $freezeTopRow
-    AutoSize = $autoSize
 }
 $instanceRoleMembers | Export-Excel @excelinstanceRoleMembersOutput
 
@@ -64,7 +62,6 @@ $exceldbRoleMembersOutput = @{
     TableName = "DatabaseLevel"
     TableStyle = $tableStyle
     FreezeTopRow = $freezeTopRow
-    AutoSize = $autoSize
 }
 $excel = $dbRoleMembers | Export-Excel @exceldbRoleMembersOutput -PassThru 
 
