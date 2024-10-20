@@ -19,6 +19,11 @@ Get-DbaDbSnapshot @snapshotSplat
 
 #################################
 # go and make some rogue changes
+
+Invoke-DbaQuery @snapshotSplat -Query "SELECT top 10 CustomerID, CompanyName, Phone FROM customers" | Format-Table 
+Invoke-DbaQuery @snapshotSplat -Query "UPDATE customers SET Phone = '330-329-6691'"
+Invoke-DbaQuery @snapshotSplat -Query "SELECT top 10 CustomerID, CompanyName, Phone FROM customers" | Format-Table  
+
 #################################
 
 # kill processes to allow us to revert snapshot
@@ -30,6 +35,9 @@ Restore-DbaDbSnapshot @snapshotSplat
 
 # clean up snapshot
 Get-DbaDbSnapshot @snapshotSplat | Remove-DbaDbSnapshot -Confirm:$false
+
+# check the data
+Invoke-DbaQuery @snapshotSplat -Query "SELECT top 10 CustomerID, CompanyName, Phone FROM customers" | Format-Table  
 
 # reset and get ready to spin!
 Invoke-DemoReset
