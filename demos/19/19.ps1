@@ -110,6 +110,9 @@ if ($results) {
    # }
 }
 
+# Open the file to view the report
+code ./export/test.HTML
+
 
 # reset and get ready to spin!
 Invoke-DemoReset
