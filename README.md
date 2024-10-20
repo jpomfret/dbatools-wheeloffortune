@@ -27,6 +27,14 @@ Demos could include:
 - Finding objects
 - and others - who knows where the wheel may take us
 
+## AutoSpin functionality
+
+For when we do this online we can now enable autospin - by setting a global variable
+`$global:Autospin = $true`
+
+Also reset the `numbers.json` file with all the numbers we need
+`1..20 | ConvertTo-Json | set-content ./Containers/dbatoolswof/Profile/numbers.json`
+
 ## Checklist
 - dev container built
 - `c:\github` folder open in explorer
@@ -34,3 +42,5 @@ Demos could include:
 - open SSMS
 - post its for chairs to select people
 - zoomit running
+- reset the numbers.json
+    `1..20 | ConvertTo-Json | set-content ./Containers/dbatoolswof/Profile/numbers.json`

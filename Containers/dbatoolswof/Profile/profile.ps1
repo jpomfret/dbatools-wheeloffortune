@@ -364,11 +364,72 @@ function Invoke-StartGame {
     } else {
         Clear-Host
         $startImage
+        Start-Sleep -Seconds 2
         
         # get the highest demo we have
         $numberFolders = (Get-ChildItem ./demos -Directory | Where-Object { $_.Name -match '^\d+$' }).name | measure -Maximum -Minimum
         Write-Output "To start the game, run the following command:"
+        
+        if ($global:autoSpin) {
+
+        
+$a = '
+      ___           ___           ___           ___           ___           ___     
+     /\  \         /\  \         /\  \         /\  \         /\  \         /\  \    
+    /::\  \       /::\  \       /::\  \       /::\  \       /::\  \       /::\  \   
+   /:/\:\  \     /:/\:\  \     /:/\:\  \     /:/\:\  \     /:/\:\  \     /:/\:\  \  
+  /:/  \:\  \   /:/  \:\  \   /:/  \:\  \   /:/  \:\  \   /:/  \:\  \   /:/  \:\  \ 
+ /:/__/ \:\__\ /:/__/ \:\__\ /:/__/ \:\__\ /:/__/ \:\__\ /:/__/ \:\__\ /:/__/ \:\__\
+ \:\  \ /:/  / \:\  \ /:/  / \:\  \ /:/  / \:\  \ /:/  / \:\  \ /:/  / \:\  \ /:/  /
+  \:\  /:/  /   \:\  /:/  /   \:\  /:/  /   \:\  /:/  /   \:\  /:/  /   \:\  /:/  / 
+   \:\/:/  /     \:\/:/  /     \:\/:/  /     \:\/:/  /     \:\/:/  /     \:\/:/  /  
+    \::/  /       \::/  /       \::/  /       \::/  /       \::/  /       \::/  /   
+     \/__/         \/__/         \/__/         \/__/         \/__/         \/__/    
+'
+$b = '
+      ___           ___           ___           ___           ___           ___     
+     /  /\         /  /\         /  /\         /  /\         /  /\         /  /\    
+    /  /::\       /  /::\       /  /::\       /  /::\       /  /::\       /  /::\   
+   /  /:/\:\     /  /:/\:\     /  /:/\:\     /  /:/\:\     /  /:/\:\     /  /:/\:\  
+  /  /:/  \:\   /  /:/  \:\   /  /:/  \:\   /  /:/  \:\   /  /:/  \:\   /  /:/  \:\ 
+ /__/:/ \__\:\ /__/:/ \__\:\ /__/:/ \__\:\ /__/:/ \__\:\ /__/:/ \__\:\ /__/:/ \__\:\
+ \  \:\ /  /:/ \  \:\ /  /:/ \  \:\ /  /:/ \  \:\ /  /:/ \  \:\ /  /:/ \  \:\ /  /:/
+  \  \:\  /:/   \  \:\  /:/   \  \:\  /:/   \  \:\  /:/   \  \:\  /:/   \  \:\  /:/ 
+   \  \:\/:/     \  \:\/:/     \  \:\/:/     \  \:\/:/     \  \:\/:/     \  \:\/:/  
+    \  \::/       \  \::/       \  \::/       \  \::/       \  \::/       \  \::/   
+     \__\/         \__\/         \__\/         \__\/         \__\/         \__\/    '
+
+        $timer = 0
+        while ($true) {
+            cls
+            $a
+            start-sleep -Milliseconds 500
+            cls
+            $b
+            start-sleep -Milliseconds 500
+            $timer++
+
+            if ($timer -gt 5) {
+
+                # pick a number and remove it from json
+                cls
+                $json = (get-content ./Containers/dbatoolswof/Profile/numbers.json | ConvertFrom-Json)
+                $num = $json | get-random
+
+                $startImage
+                Write-Host ('The Wheel chooses {0}' -f $num)
+
+                $json | Where-Object {$_ -ne $num} | ConvertTo-Json | set-content ./Containers/dbatoolswof/Profile/numbers.json
+
+                Start-Sleep -Seconds 2
+
+                break
+            }
+        }
+    } else {
+
         [int]$num = Read-Host "Spin the wheel, and enter the number..."
+    }
                 
         while(-not ([int]$num -ge [int]$numberFolders.Minimum -and [int]$num -le [int]$numberFolders.Maximum)) {
             Write-Host "That demo doesn't exist yet. Please spin again." -ForegroundColor Red
