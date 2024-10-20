@@ -51,6 +51,9 @@ New-DbaDatabase @splatCreate
     Invoke-DbaQuery -SqlInstance $SqlInstance -Database $destinationDatabase -File $psitem.FullName
 }
 
+# Check the data
+Invoke-DbaQuery -SqlInstance $SqlInstance -Database $destinationDatabase -Query "SELECT name, create_date from sys.tables" | Format-Table
+
 # clean up files
 Get-ChildItem $folderPath *.sql | Remove-Item
 
