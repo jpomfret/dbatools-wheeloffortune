@@ -5,7 +5,9 @@
 ###
 
 # get the latest SQL container and set it as the builder image
-FROM mcr.microsoft.com/mssql/server:2022-latest as builder
+FROM mcr.microsoft.com/mssql/server:2022-CU13-ubuntu-22.04 as builder
+# Note Starting with SQL Server 2022 CU 14, we are updating SQL Server 2022 container images to include the new mssql-tools18 package
+# if we use a later version we need to work out how to add sqlcmd to the path 
 
 # switch to root to a bunch of stuff that requires elevated privs
 USER root
