@@ -272,7 +272,7 @@ CREATE TABLE [dbo].[TestTable] (
 )
 
 INSERT INTO [dbo].[TestTable] ([Name])
-SELECT 'Data Grillen'
+SELECT 'dbatools Wheel of Fortune'
 
 GRANT SELECT, INSERT, UPDATE, DELETE ON [dbo].[TestTable] TO [PRODLogin]
 
