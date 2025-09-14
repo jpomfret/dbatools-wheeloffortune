@@ -238,6 +238,8 @@ Set-Content Function:prompt {
 }
 
 ######## wof setup
+# get latest build reference
+Get-DbaBuildReference -Update
 # change the servernames to be dbatoosl - doesn't seem to work in the container build process right now
 Invoke-DbaQuery -SqlInstance $dbatools1 -Query "declare @oldSrv sysname; select @oldSrv = srvname from master.dbo.sysservers; EXEC sp_dropserver @oldSrv; EXEC sp_addserver 'dbatools1', local"
 Invoke-DbaQuery -SqlInstance $dbatools2 -Query "declare @oldSrv sysname; select @oldSrv = srvname from master.dbo.sysservers; EXEC sp_dropserver @oldSrv; EXEC sp_addserver 'dbatools2', local"
@@ -425,11 +427,11 @@ $b = '
 
                 break
             }
+        } elseif ($global:gifspin) {
+            Write-Host "Go and spin the gif wheel..."
+        } else {
+            [int]$num = Read-Host "Spin the wheel, and enter the number..."
         }
-    } else {
-
-        [int]$num = Read-Host "Spin the wheel, and enter the number..."
-    }
                 
         while(-not ([int]$num -ge [int]$numberFolders.Minimum -and [int]$num -le [int]$numberFolders.Maximum)) {
             Write-Host "That demo doesn't exist yet. Please spin again." -ForegroundColor Red

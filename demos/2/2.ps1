@@ -14,7 +14,7 @@ Test-DbaBuild -SqlInstance dbatools1, dbatools2 -Latest | Format-Table
 Test-DbaBuild -SqlInstance dbatools1 -MaxBehind 1CU
 
 # Example when compliant
-Test-DbaBuild -SqlInstance dbatools1 -MaxBehind 8CU
+Test-DbaBuild -SqlInstance dbatools1 -MaxBehind 14CU
 
 #Example using more specific versions
 $mapping = @{

@@ -43,4 +43,4 @@ Also reset the `numbers.json` file with all the numbers we need
 - post its for chairs to select people
 - zoomit running
 - reset the numbers.json
-    `1..20 | ConvertTo-Json | set-content ./Containers/dbatoolswof/Profile/numbers.json`
+    `1..20 | Where-Object {$_ -notin (7,14)} | ConvertTo-Json | set-content ./Containers/dbatoolswof/Profile/numbers.json`

@@ -7,7 +7,7 @@
 $database = "tempdb"
 $table = "authors"
 $csvPath = "./demos/20/authors.csv"
-$delimitier = "|"
+$delimiter = "|"
 
 # Import the csv file to a table into the database
 
@@ -16,7 +16,7 @@ $splatImportCSV = @{
 	Database = $database
     Table = $table
     Path = $csvPath
-    Delimiter = $delimitier
+    Delimiter = $delimiter
     AutoCreateTable = $true
 }
 Import-DbaCsv @splatImportCSV
@@ -41,7 +41,7 @@ $splatImportCSV = @{
 	Database = $database
     Table = "$table-2"
     Path = $csvPathBigger
-    Delimiter = $delimitier
+    Delimiter = $delimiter
     AutoCreateTable = $true
 }
 Import-DbaCsv @splatImportCSV

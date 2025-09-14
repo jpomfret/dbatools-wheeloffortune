@@ -21,8 +21,8 @@ Export-DbaInstance @splatExportInstance
 
 <#
     Other/optional
-     - replace suffix 
-     - put on git
+        - replace suffix 
+        - put on git
     NOTE: You can read more about this approach on my blog posts:
         Backup your SQL instances configurations to GIT with dbatools – Part 1 (https://claudioessilva.eu/2020/06/02/Backup-your-SQL-instances-configurations-to-GIT-with-dbatools-Part-1/)
         Backup your SQL instances configurations to GIT with dbatools – Part 2 – Add parallelism (https://claudioessilva.eu/2020/06/04/backup-your-sql-instances-configurations-to-git-with-dbatools-part-2-add-parallelism/)
