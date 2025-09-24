@@ -1,0 +1,1 @@
+$global:image = Get-SpectreImage .\spin-12315.gif -maxWidth 75

@@ -1,4 +1,4 @@
-$image = Get-SpectreImage .\wheel.gif -maxWidth 75
+#$image = Get-SpectreImage .\wheel.gif -maxWidth 75
 #$image = Get-SpectreImage .\spin-12315.gif -maxWidth 75
 $random = 25
 
