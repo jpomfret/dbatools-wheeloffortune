@@ -141,7 +141,8 @@ Set-Content Function:prompt {
         if (Test-Path ~/.azure/clouds.config) {
             if ((Get-Command "sed" -ErrorAction Ignore) -ne $null) {
                 $currentSub = & sed -nr "/^\[AzureCloud\]/ { :l /^subscription[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" ~/.azure/clouds.config
-            } else {
+            }
+            else {
                 $file = Get-Content ~/.azure/clouds.config
                 $currentSub = ([regex]::Matches($file, '^.*subscription\s=\s(.*)').Groups[1].Value).Trim()
             }
@@ -177,7 +178,8 @@ Set-Content Function:prompt {
         # if ($idx -gt -1) { $currentPath = $currentPath.Substring($idx + 2) }
         if ($IsLinux) {
             $currentPath = $($pwd.path.Split('/')[-2..-1] -join '/')
-        } else {
+        }
+        else {
             $currentPath = $($pwd.path.Split('\')[-2..-1] -join '\')
         }
         Write-Host " " -NoNewline
@@ -195,12 +197,14 @@ Set-Content Function:prompt {
                 if (([System.Management.Automation.PSTypeName]'Sqlcollaborative.Dbatools.Utility.DbaTimeSpanPretty').Type) {
                     $timemessage = " " + ( [Sqlcollaborative.Dbatools.Utility.DbaTimeSpanPretty]($history[-1].EndExecutionTime - $history[-1].StartExecutionTime))
                     Write-Host $timemessage -ForegroundColor DarkYellow -BackgroundColor DarkGray -NoNewline
-                } else {
+                }
+                else {
                     Write-Host " $([Math]::Round(($history[-1].EndExecutionTime - $history[-1].StartExecutionTime).TotalMilliseconds,2))" -ForegroundColor DarkYellow -BackgroundColor DarkGray  -NoNewline
                 }
             }
             Write-Host " " -ForegroundColor DarkBlue -NoNewline
-        } catch { }
+        }
+        catch { }
     }
     # Write one + for each level of the pushd stack
     if ((Get-Location -Stack).Count -gt 0) {
@@ -216,7 +220,8 @@ Set-Content Function:prompt {
         $windowsIdentity = [System.Security.Principal.WindowsIdentity]::GetCurrent()
         $windowsPrincipal = New-Object 'System.Security.Principal.WindowsPrincipal' $windowsIdentity
         $isAdmin = $windowsPrincipal.IsInRole("Administrators") -eq 1
-    } else {
+    }
+    else {
         $isAdmin = ((& id -u) -eq 0)
     }
 
@@ -227,7 +232,8 @@ Set-Content Function:prompt {
     # Write PS> for desktop PowerShell, pwsh> for PowerShell Core
     if ($isDesktop) {
         Write-Host " PS5>" -NoNewline -ForegroundColor $color
-    } else {
+    }
+    else {
         $version = $PSVersionTable.PSVersion.ToString()
         #Write-Host " pwsh $Version>" -NoNewLine -ForegroundColor $color
         Write-Host "$($color)pwsh $Version>" -NoNewline
@@ -248,20 +254,20 @@ Invoke-DbaQuery -SqlInstance $dbatools2 -Query "declare @oldSrv sysname; select 
 Get-ChildItem ./Export/ | Remove-item -Recurse
 
 # create DatabaseAdmin database
-if(-not (Get-DbaDatabase -SqlInstance $dbatools1 -Database DatabaseAdmin)) {
+if (-not (Get-DbaDatabase -SqlInstance $dbatools1 -Database DatabaseAdmin)) {
     $null = New-DbaDatabase -SqlInstance $dbatools1 -Name DatabaseAdmin
 }
 
 # Begin ToTestRefresh preparation
-if(-not (Get-DbaDatabase -SqlInstance $dbatools1 -Database ToTestRefresh)) {
+if (-not (Get-DbaDatabase -SqlInstance $dbatools1 -Database ToTestRefresh)) {
     $null = New-DbaDatabase -SqlInstance $dbatools1 -Name ToTestRefresh -RecoveryModel Simple
 }
 
-if(-not (Get-DbaLogin -SqlInstance $dbatools1 -Login PRODLogin)) {
+if (-not (Get-DbaLogin -SqlInstance $dbatools1 -Login PRODLogin)) {
     $null = New-DbaLogin -SqlInstance $dbatools1 -Login PRODLogin -SecurePassword $securePassword
 }
 
-if(-not (Get-DbaDbUser -SqlInstance $dbatools1 -Database ToTestRefresh -Login PRODLogin)) {
+if (-not (Get-DbaDbUser -SqlInstance $dbatools1 -Database ToTestRefresh -Login PRODLogin)) {
     $null = New-DbaDbUser -SqlInstance $dbatools1 -Database ToTestRefresh -Username PRODLogin -Login PRODLogin
 }
 
@@ -286,7 +292,7 @@ Invoke-DbaQuery -SqlInstance dbatools1 -Database "ToTestRefresh" -Query $toRefre
 
 $dbs = @{
     SqlInstance = $dbatools1
-    Database    = 'Northwind','Pubs'
+    Database    = 'Northwind', 'Pubs'
 }
 
 # set recovery model to full
@@ -355,7 +361,7 @@ ______ ___________ _____ _   _ _   _  _____
 #  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------. '
 
 
- ## run the game
+## run the game
 function Invoke-StartGame {
     ## run tests
     $tests = Invoke-Pester .\Tests\demo.tests.ps1 -PassThru -Show Failed
@@ -363,7 +369,8 @@ function Invoke-StartGame {
     if ($tests.FailedCount -ne 0) {
         Write-Output "Tests failed. Please fix the tests before starting the game."
         return
-    } else {
+    }
+    else {
         Clear-Host
         $startImage
         Start-Sleep -Seconds 2
@@ -375,7 +382,7 @@ function Invoke-StartGame {
         if ($global:autoSpin) {
 
         
-$a = '
+            $a = '
       ___           ___           ___           ___           ___           ___     
      /\  \         /\  \         /\  \         /\  \         /\  \         /\  \    
     /::\  \       /::\  \       /::\  \       /::\  \       /::\  \       /::\  \   
@@ -388,7 +395,7 @@ $a = '
     \::/  /       \::/  /       \::/  /       \::/  /       \::/  /       \::/  /   
      \/__/         \/__/         \/__/         \/__/         \/__/         \/__/    
 '
-$b = '
+            $b = '
       ___           ___           ___           ___           ___           ___     
      /  /\         /  /\         /  /\         /  /\         /  /\         /  /\    
     /  /::\       /  /::\       /  /::\       /  /::\       /  /::\       /  /::\   
@@ -401,71 +408,74 @@ $b = '
     \  \::/       \  \::/       \  \::/       \  \::/       \  \::/       \  \::/   
      \__\/         \__\/         \__\/         \__\/         \__\/         \__\/    '
 
-        $timer = 0
-        while ($true) {
-            cls
-            $a
-            start-sleep -Milliseconds 500
-            cls
-            $b
-            start-sleep -Milliseconds 500
-            $timer++
-
-            if ($timer -gt 5) {
-
-                # pick a number and remove it from json
+            $timer = 0
+            while ($true) {
                 cls
-                $json = (get-content ./Containers/dbatoolswof/Profile/numbers.json | ConvertFrom-Json)
-                $num = $json | get-random
+                $a
+                start-sleep -Milliseconds 500
+                cls
+                $b
+                start-sleep -Milliseconds 500
+                $timer++
 
-                $startImage
-                Write-Host ('The Wheel chooses {0}' -f $num)
+                if ($timer -gt 5) {
 
-                $json | Where-Object {$_ -ne $num} | ConvertTo-Json | set-content ./Containers/dbatoolswof/Profile/numbers.json
+                    # pick a number and remove it from json
+                    cls
+                    $json = (get-content ./Containers/dbatoolswof/Profile/numbers.json | ConvertFrom-Json)
+                    $num = $json | get-random
 
-                Start-Sleep -Seconds 2
+                    $startImage
+                    Write-Host ('The Wheel chooses {0}' -f $num)
 
-                break
+                    $json | Where-Object { $_ -ne $num } | ConvertTo-Json | set-content ./Containers/dbatoolswof/Profile/numbers.json
+
+                    Start-Sleep -Seconds 2
+
+                    break
+                }
             }
-        } elseif ($global:gifspin) {
-            Write-Host "Go and spin the gif wheel..."
-        } else {
-            [int]$num = Read-Host "Spin the wheel, and enter the number..."
-        }
+            elseif ($global:gifspin) {
+                Write-Host "Go and spin the gif wheel..."
+            } else {
+                [int]$num = Read-Host "Spin the wheel, and enter the number..."
+            }
                 
-        while(-not ([int]$num -ge [int]$numberFolders.Minimum -and [int]$num -le [int]$numberFolders.Maximum)) {
-            Write-Host "That demo doesn't exist yet. Please spin again." -ForegroundColor Red
-            Start-Sleep -Seconds 1
+            while (-not ([int]$num -ge [int]$numberFolders.Minimum -and [int]$num -le [int]$numberFolders.Maximum)) {
+                Write-Host "That demo doesn't exist yet. Please spin again." -ForegroundColor Red
+                Start-Sleep -Seconds 1
             
-            Write-Output "To start the game, run the following command:"
-            [int]$num = Read-Host "Spin the wheel, and enter the number..."
+                Write-Output "To start the game, run the following command:"
+                [int]$num = Read-Host "Spin the wheel, and enter the number..."
+            }
+
+            Get-DemoFile -number $num
         }
-
-        Get-DemoFile -number $num
     }
 }
 
- # function to open the game file
-function Get-DemoFile {
-    param (
-        $number
-    )
-    try {
-        code "demos/$number/$number.ps1"
-    } catch {
-        code-insiders "demos/$number/$number.ps1"
+    # function to open the game file
+    function Get-DemoFile {
+        param (
+            $number
+        )
+        try {
+            code "demos/$number/$number.ps1"
+        }
+        catch {
+            code-insiders "demos/$number/$number.ps1"
+        }
+        cls
     }
-    cls
-}
 
-# function to open the game file
-function Invoke-DemoReset {
-    Write-Output "Resetting the demo environment..."
-    . /workspace/demos/reset.ps1
+    # function to open the game file
+    function Invoke-DemoReset {
+        Write-Output "Resetting the demo environment..."
+        . /workspace/demos/reset.ps1
     
+        Invoke-StartGame
+    }
+
+
+    ## start the game
     Invoke-StartGame
-}
-
-
-## start the game
-Invoke-StartGame
