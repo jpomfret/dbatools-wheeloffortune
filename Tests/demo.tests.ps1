@@ -7,8 +7,8 @@ Describe "Module is good to go" {
         It "Module was imported" {
             $module | Should Not BeNullOrEmpty
         }
-        It "Module version is 2.7.3" {
-            $module.Version | Should Be "2.7.3"
+        It "Module version is 2.7.6" {
+            $module.Version | Should Be "2.7.6"
         }
         It "Module should import 684 commands" {
             (get-command -module dbatools -CommandType Function | Measure).Count | Should Be 684

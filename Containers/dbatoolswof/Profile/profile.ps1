@@ -435,12 +435,11 @@ function Invoke-StartGame {
                     break
                 }
             }
-            elseif ($global:gifspin) {
-                Write-Host "Go and spin the gif wheel..."
-            } else {
-                [int]$num = Read-Host "Spin the wheel, and enter the number..."
-            }
-                
+        } elseif ($global:gifspin) {
+            Write-Host "Go and spin the gif wheel..."
+            [int]$num = Read-Host "Spin the wheel, and enter the number..."
+        }
+
             while (-not ([int]$num -ge [int]$numberFolders.Minimum -and [int]$num -le [int]$numberFolders.Maximum)) {
                 Write-Host "That demo doesn't exist yet. Please spin again." -ForegroundColor Red
                 Start-Sleep -Seconds 1
@@ -452,7 +451,6 @@ function Invoke-StartGame {
             Get-DemoFile -number $num
         }
     }
-}
 
     # function to open the game file
     function Get-DemoFile {

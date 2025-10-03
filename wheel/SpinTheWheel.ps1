@@ -18,4 +18,8 @@ $num = $json | get-random
 
 $json | Where-Object {$_ -ne $num} | ConvertTo-Json | set-content numbers.json
 
-Format-SpectrePanel -Data ('Demo number {0}' -f $num) -Title "The Wheel Chooses:" -Border "Rounded" -Color "Red" -Width 30
+#Format-SpectrePanel -Data ('Demo number {0}' -f $num) -Title "The Wheel Chooses:" -Border "Rounded" -Color "Red" -Width 30
+
+Write-SpectreFigletText -Text ('Demo number {0}' -f $num) -Color Red
+$num | clip
+
