@@ -33,11 +33,11 @@ Get-DbaProcess @snapshotSplat | Stop-DbaProcess
 # revert snapshot
 Restore-DbaDbSnapshot @snapshotSplat
 
-# clean up snapshot
-Get-DbaDbSnapshot @snapshotSplat | Remove-DbaDbSnapshot -Confirm:$false
-
 # check the data
 Invoke-DbaQuery @snapshotSplat -Query "SELECT top 10 CustomerID, CompanyName, Phone FROM customers" | Format-Table  
+
+# clean up snapshot
+Get-DbaDbSnapshot @snapshotSplat | Remove-DbaDbSnapshot -Confirm:$false
 
 # reset and get ready to spin!
 Invoke-DemoReset
