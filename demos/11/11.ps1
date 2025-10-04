@@ -36,6 +36,12 @@ Restore-DbaDbSnapshot @snapshotSplat
 # check the data
 Invoke-DbaQuery @snapshotSplat -Query "SELECT top 10 CustomerID, CompanyName, Phone FROM customers" | Format-Table  
 
+$snapshotSplat = @{
+    SqlInstance = 'dbatools1'
+    Database    = 'Northwind_20251004_120925'
+}
+Invoke-DbaQuery @snapshotSplat -Query "SELECT top 10 CustomerID, CompanyName, Phone FROM customers" | Format-Table  
+
 # clean up snapshot
 Get-DbaDbSnapshot @snapshotSplat | Remove-DbaDbSnapshot -Confirm:$false
 
