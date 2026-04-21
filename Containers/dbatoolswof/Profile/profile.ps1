@@ -377,7 +377,7 @@ function Invoke-StartGame {
         
         # get the highest demo we have
         $numberFolders = (Get-ChildItem ./demos -Directory | Where-Object { $_.Name -match '^\d+$' }).name | measure -Maximum -Minimum
-        Write-Output "To start the game, run the following command:"
+        #Write-Output "To start the game, run the following command:"
         
         if ($global:autoSpin) {
 
@@ -437,6 +437,8 @@ function Invoke-StartGame {
             }
         } elseif ($global:gifspin) {
             Write-Host "Go and spin the gif wheel..."
+            [int]$num = Read-Host "Spin the wheel, and enter the number..."
+        } else {
             [int]$num = Read-Host "Spin the wheel, and enter the number..."
         }
 
