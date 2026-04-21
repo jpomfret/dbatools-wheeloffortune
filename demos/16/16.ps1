@@ -38,10 +38,16 @@ $createOptions.ScriptBatchTerminator = $true
 $createOptions.AnsiFile = $true
 $objects | Export-DbaScript -FilePath ('{0}\CreateObjects.Sql' -f $tempFolder) -ScriptingOptionsObject $createOptions
 
+# let's look at that sql file
+code ('{0}CreateObjects.Sql' -f $tempFolder)
+
 ## Script out the drop statements for objects
 $dropOptions = New-DbaScriptingOption
 $dropOptions.ScriptDrops = $true
 $objects| Export-DbaScript -FilePath ('{0}\DropObjects.Sql' -f $tempFolder) -ScriptingOptionsObject $dropOptions
+
+# let's look at that sql file
+code ('{0}DropObjects.Sql' -f $tempFolder)
 
 # Run the drop scripts
 Invoke-DbaQuery -SqlInstance $svr -Database $database -File ('{0}\DropObjects.Sql' -f $tempFolder)
