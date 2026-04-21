@@ -8,6 +8,7 @@
 $snapshotSplat = @{
     SqlInstance = 'dbatools1'
     Database    = 'Northwind'
+    OutVariable = 'snappy'
 }
 New-DbaDbSnapshot @snapshotSplat
 
@@ -38,7 +39,7 @@ Invoke-DbaQuery @snapshotSplat -Query "SELECT top 10 CustomerID, CompanyName, Ph
 
 $snapshotSplat = @{
     SqlInstance = 'dbatools1'
-    Database    = 'Northwind_20251004_120925'
+    Database    = $snappy.Name
 }
 Invoke-DbaQuery @snapshotSplat -Query "SELECT top 10 CustomerID, CompanyName, Phone FROM customers" | Format-Table  
 

@@ -44,3 +44,5 @@ Also reset the `numbers.json` file with all the numbers we need
 - zoomit running
 - reset the numbers.json
     `1..20 | Where-Object {$_ -notin (7,14)} | ConvertTo-Json | set-content ./Containers/dbatoolswof/Profile/numbers.json`
+- start the game
+    `Invoke-StartGame`
