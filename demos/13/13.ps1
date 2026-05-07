@@ -47,8 +47,29 @@ New-DbaDatabase @splatCreate
 # Execute a folder of scripts #
 ###############################
 
+
 (Get-ChildItem $folderPath *.sql).Foreach{
     Invoke-DbaQuery -SqlInstance $SqlInstance -Database $destinationDatabase -File $psitem.FullName
+}
+
+# Had a great question about error handling, so if you want the first error to stop all scripts from executing
+# wrap the whole thing in a try/catch block and use the -EnableException switch on Invoke-DbaQuery.
+try {
+    (Get-ChildItem $folderPath *.sql).Foreach{
+        Invoke-DbaQuery -SqlInstance $SqlInstance -Database $destinationDatabase -File $psitem.FullName -EnableException
+    }
+} catch {
+    Write-Error "Something went wrong executing the scripts: $_"
+}
+
+# and if you want just the script to throw an error but the rest to continue
+# you can use a try/catch block inside the loop instead. Still use the -EnableException switch on Invoke-DbaQuery.
+(Get-ChildItem $folderPath *.sql).Foreach{
+        try {
+        Invoke-DbaQuery -SqlInstance $SqlInstance -Database $destinationDatabase -File $psitem.FullName -EnableException
+    } catch {
+        Write-Error "Something went wrong executing the scripts: $_"
+    }
 }
 
 # Check the data
